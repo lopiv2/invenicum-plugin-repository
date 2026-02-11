@@ -1,5 +1,5 @@
 {
-  "type": "ElevatedButton",
+  "type": "elevatedButton",
   "child": { "type": "text", "data": "Quién soy?" },
   "onPressed": {
     "actionType": "invenicum_sdk",
