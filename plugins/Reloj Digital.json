@@ -1,0 +1,12 @@
+{
+  "id": "reloj_01",
+  "name": "Reloj Digital",
+  "content": {
+    "type": "Container",
+    "attributes": { "color": "#000000", "padding": 10 },
+    "child": {
+      "type": "Text",
+      "attributes": { "data": "12:00", "style": { "fontSize": 20 } }
+    }
+  }
+}
