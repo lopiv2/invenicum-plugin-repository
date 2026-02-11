@@ -1,7 +1,6 @@
 {
   "name": "Invenicum Official Store",
   "description": "Repositorio oficial de extensiones",
-  "url": "https://tu-usuario.github.io/invenicum-plugin-repository/",
   "plugins": [
     {
       "id": "reloj_digital_01",
@@ -9,8 +8,8 @@
       "version": "1.0.0",
       "description": "Muestra un reloj elegante en tu dashboard.",
       "author": "Invenicum Team",
-      "icon_url": "https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/assets/reloj_icon.png",
-      "download_url": "https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/plugins/reloj_digital.json"
+      "icon_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/assets/reloj_icon.png",
+      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/plugins/reloj_digital.json"
     }
   ]
 }
