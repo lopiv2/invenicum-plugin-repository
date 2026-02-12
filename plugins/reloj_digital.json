@@ -1,12 +1,20 @@
 {
-  "id": "reloj_digital_01",
-  "name": "Reloj Digital",
-  "content": {
-    "type": "Container",
-    "attributes": { "color": "#000000", "padding": 10 },
+  "type": "container",
+  "decoration": {
+    "color": "#000000",
+    "borderRadius": {
+      "topLeft": 16.0,
+      "topRight": 16.0,
+      "bottomLeft": 16.0,
+      "bottomRight": 16.0
+    }
     "child": {
-      "type": "Text",
-      "attributes": { "data": "12:00", "style": { "fontSize": 20 } }
+    "type": "text",
+    "data": "12:00",
+    "style": {
+      "color": "#FFFFFF",
+      "fontSize": 24.0
     }
   }
+  },
 }
