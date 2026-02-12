@@ -7,14 +7,14 @@
       "topRight": 16.0,
       "bottomLeft": 16.0,
       "bottomRight": 16.0
-    }
+    },
     "child": {
-    "type": "text",
-    "data": "12:00",
+        "type": "text",
+        "data": "12:00",
     "style": {
       "color": "#FFFFFF",
       "fontSize": 24.0
+      }
     }
   }
-  },
 }
