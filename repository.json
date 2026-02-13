@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "description": "Muestra un reloj elegante en tu dashboard.",
       "author": "Invenicum Team",
-      "isOfficial": true, 
+      "isOfficial": true,
       "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/plugins/reloj_digital.json"
     },
     {
@@ -17,8 +17,17 @@
       "version": "2.0.0",
       "description": "Muestra quien soy.",
       "author": "Invenicum Team",
-      "isOfficial": true, 
+      "isOfficial": true,
       "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/plugins/quien_soy.json"
+    },
+    {
+      "id": "sasdada",
+      "name": "sasdada",
+      "version": "1.0.0",
+      "description": "Plugin creado por usuario",
+      "author": "Usuario Comunidad",
+      "isOfficial": false,
+      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/plugins/sasdada.json"
     }
   ]
 }
