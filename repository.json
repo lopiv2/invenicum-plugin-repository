@@ -28,6 +28,15 @@
       "author": "Usuario Comunidad",
       "isOfficial": false,
       "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/plugins/sasdada.json"
+    },
+    {
+      "id": "probando",
+      "name": "Probando",
+      "version": "1.0.0",
+      "description": "Plugin created by the community",
+      "author": "Community User",
+      "isOfficial": false,
+      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/plugins/probando.json"
     }
   ]
 }
