@@ -1,0 +1,7 @@
+{
+  "type": "container",
+  "child": {
+    "data": "Nuevo Plugin",
+    "type": "text"
+  }
+}
