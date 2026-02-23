@@ -29,5 +29,31 @@
       "isOfficial": false,
       "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/plugins/sasdada.json"
     }
+  ],
+  "templates": [
+    {
+      "id": "tpl-smartphone-001",
+      "name": "Smartphone",
+      "description": "Plantilla para dispositivos móviles de gama alta",
+      "category": "Electrónica",
+      "tags": ["móvil", "apple", "android", "tecnología"],
+      "author": "Invenicum Team",
+      "authorAvatarUrl": "https://avatars.githubusercontent.com/u/invenicum",
+      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/templates/smartphone.json",
+      "downloadCount": 150,
+      "version": 1.1
+    },
+    {
+      "id": "tpl-retro-game-003",
+      "name": "Videojuego Retro",
+      "description": "Registro detallado para coleccionistas de juegos clásicos",
+      "category": "Coleccionismo",
+      "tags": ["nintendo", "sega", "retro", "gaming"],
+      "author": "Invenicum Team",
+      "authorAvatarUrl": "https://avatars.githubusercontent.com/u/invenicum",
+      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-plugin-repository/main/templates/retro_game.json",
+      "downloadCount": 89,
+      "version": 2.0
+    }
   ]
 }
