@@ -1,72 +1,21 @@
 {
   "id": "tpl-retro-game-003",
-  "name": "Videojuego Retro",
-  "description": "Registro detallado para coleccionistas de juegos clásicos",
-  "category": "Coleccionismo",
-  "tags": [
-    "nintendo",
-    "sega",
-    "retro",
-    "gaming"
-  ],
-  "author": "Invenicum Team",
-  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/invenicum",
-  "downloadCount": 89,
-  "version": 2.0,
   "fields": [
     {
       "name": "Plataforma",
       "type": "select",
-      "options": [
-        "NES",
-        "Super Nintendo",
-        "Mega Drive",
-        "Game Boy",
-        "Nintendo 64",
-        "PlayStation 1"
-      ],
+      "options": ["NES", "SNES", "MD"],
       "required": true
     },
     {
       "name": "Región",
       "type": "select",
-      "options": [
-        "PAL (Europa)",
-        "NTSC-U (USA)",
-        "NTSC-J (Japón)"
-      ],
+      "options": ["PAL", "NTSC"],
       "required": true
     },
     {
-      "name": "Estado del soporte",
-      "type": "select",
-      "options": [
-        "Nuevo/Sellado",
-        "Como nuevo",
-        "Buen estado",
-        "Desgastado",
-        "Solo cartucho/disco"
-      ],
-      "required": false
-    },
-    {
-      "name": "Completo en caja (CIB)",
+      "name": "CIB (Completo)",
       "type": "boolean",
-      "required": false
-    },
-    {
-      "name": "Manual incluido",
-      "type": "boolean",
-      "required": false
-    },
-    {
-      "name": "Valor Estimado",
-      "type": "number",
-      "required": false
-    },
-    {
-      "name": "Notas del coleccionista",
-      "type": "text",
       "required": false
     }
   ]
