@@ -1,16 +1,22 @@
 {
-  "id": "tpl-smartphone-001",
-  "name": "Smartphone",
-  "description": "Plantilla para dispositivos móviles de gama alta",
-  "category": "Electrónica",
-  "tags": ["móvil", "apple", "android", "tecnología"],
-  "author": "github_user_1",
-  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/1",
+  "id": "tpl-retro-game-003",
   "fields": [
-    { "name": "Marca", "type": "text", "required": true },
-    { "name": "Almacenamiento", "type": "select", "options": ["128GB", "256GB", "512GB"], "required": true },
-    { "name": "IMEI", "type": "text", "required": true }
-  ],
-  "downloadCount": 150,
-  "version": 1.1
+    {
+      "name": "Plataforma",
+      "type": "select",
+      "options": ["NES", "SNES", "MD"],
+      "required": true
+    },
+    {
+      "name": "Región",
+      "type": "select",
+      "options": ["PAL", "NTSC"],
+      "required": true
+    },
+    {
+      "name": "CIB (Completo)",
+      "type": "boolean",
+      "required": false
+    }
+  ]
 }
