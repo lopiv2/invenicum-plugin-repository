@@ -1,20 +1,66 @@
 {
-  "id": "tpl-retro-game-003",
+  "id": "tpl-smartphone-001",
   "fields": [
     {
-      "name": "Plataforma",
+      "name": "Marca",
       "type": "select",
-      "options": ["NES", "SNES", "MD"],
+      "options": [
+        "Apple",
+        "Samsung",
+        "Google",
+        "Xiaomi",
+        "Huawei",
+        "OnePlus",
+        "Otro"
+      ],
       "required": true
     },
     {
-      "name": "Región",
-      "type": "select",
-      "options": ["PAL", "NTSC"],
+      "name": "Modelo",
+      "type": "text",
       "required": true
     },
     {
-      "name": "CIB (Completo)",
+      "name": "Almacenamiento",
+      "type": "select",
+      "options": [
+        "64GB",
+        "128GB",
+        "256GB",
+        "512GB",
+        "1TB"
+      ],
+      "required": true
+    },
+    {
+      "name": "Color",
+      "type": "text",
+      "required": false
+    },
+    {
+      "name": "IMEI / Número de Serie",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "Estado del Dispositivo",
+      "type": "select",
+      "options": [
+        "Nuevo",
+        "Excelente",
+        "Buen estado",
+        "Pantalla dañada",
+        "Para piezas"
+      ],
+      "required": true
+    },
+    {
+      "name": "Salud de Batería (%)",
+      "type": "number",
+      "required": false
+    },
+    {
+      "name": "Incluye Caja Original",
       "type": "boolean",
       "required": false
     }
