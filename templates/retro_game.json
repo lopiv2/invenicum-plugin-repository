@@ -3,13 +3,13 @@
   "fields": [
     {
       "name": "Plataforma",
-      "type": "select",
+      "type": "dropdown",
       "options": ["NES", "SNES", "MD"],
       "required": true
     },
     {
       "name": "Región",
-      "type": "select",
+      "type": "dropdown",
       "options": ["PAL", "NTSC"],
       "required": true
     },
