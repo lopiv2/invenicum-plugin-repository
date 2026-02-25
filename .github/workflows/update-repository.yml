@@ -5,7 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'templates/**' # Solo se activa si cambias algo en las plantillas
+      - 'templates/**'
+
+# 🚩 IMPORTANTE: Permisos para que la Action pueda escribir el commit
+permissions:
+  contents: write
 
 jobs:
   update-index:
@@ -13,34 +17,53 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Generate repository.json
         run: |
-          echo "{" > repository.json
+          # 1. Crear la estructura base
+          echo '{' > repository.json
           echo '  "name": "Invenicum Market",' >> repository.json
           echo '  "templates": [' >> repository.json
           
-          # Itera sobre cada archivo .json en la carpeta templates
+          # 2. Variable para manejar las comas entre objetos
           first=true
+          
+          # 3. Iterar sobre los archivos
           for file in templates/*.json; do
+            # Saltamos si no hay archivos o es el propio repository.json por error
+            [ -e "$file" ] || continue
+            
             if [ "$first" = true ]; then
               first=false
             else
               echo "," >> repository.json
             fi
             
-            # Extrae la info básica del archivo para el índice
-            # Usamos jq para leer el nombre, id, etc., del propio archivo
-            cat "$file" | jq '{id, name, description, category, tags, author, authorAvatarUrl, download_url: "https://raw.githubusercontent.com/${{ github.repository }}/main/'"$file"'"}' >> repository.json
+            # 🚩 Extraemos los datos. Ajustamos el download_url dinámicamente.
+            # Usamos jq para filtrar y limpiar el objeto
+            cat "$file" | jq --arg url "https://raw.githubusercontent.com/${{ github.repository }}/main/$file" \
+            '{
+              id: .id,
+              name: .name,
+              description: .description,
+              category: .category,
+              tags: (.tags // []),
+              author: (.author // .authorName // "Invenicum Team"),
+              authorAvatarUrl: .authorAvatarUrl,
+              download_url: $url,
+              version: (.version // 1.0)
+            }' >> repository.json
           done
           
           echo '  ]' >> repository.json
-          echo "}" >> repository.json
+          echo '}' >> repository.json
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add repository.json
-          git commit -m "bot: update repository.json index" || exit 0
-          git push
+          # Solo hacemos commit si hay cambios reales
+          git diff --quiet && git diff --staged --quiet || (git commit -m "bot: update repository.json index" && git push)
