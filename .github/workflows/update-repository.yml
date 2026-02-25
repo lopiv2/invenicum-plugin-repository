@@ -1,0 +1,46 @@
+name: Update Repository Index
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'templates/**' # Solo se activa si cambias algo en las plantillas
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Generate repository.json
+        run: |
+          echo "{" > repository.json
+          echo '  "name": "Invenicum Market",' >> repository.json
+          echo '  "templates": [' >> repository.json
+          
+          # Itera sobre cada archivo .json en la carpeta templates
+          first=true
+          for file in templates/*.json; do
+            if [ "$first" = true ]; then
+              first=false
+            else
+              echo "," >> repository.json
+            fi
+            
+            # Extrae la info básica del archivo para el índice
+            # Usamos jq para leer el nombre, id, etc., del propio archivo
+            cat "$file" | jq '{id, name, description, category, tags, author, authorAvatarUrl, download_url: "https://raw.githubusercontent.com/${{ github.repository }}/main/'"$file"'"}' >> repository.json
+          done
+          
+          echo '  ]' >> repository.json
+          echo "}" >> repository.json
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add repository.json
+          git commit -m "bot: update repository.json index" || exit 0
+          git push
