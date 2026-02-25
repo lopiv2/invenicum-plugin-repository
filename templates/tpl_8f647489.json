@@ -1,0 +1,28 @@
+{
+  "id": "tpl_8f647489",
+  "name": "sdsdfsdf",
+  "description": "",
+  "downloadUrl": null,
+  "category": "General",
+  "tags": [],
+  "author": "lopiv2",
+  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+  "fields": [
+    {
+      "id": null,
+      "name": "Nuevo Campo",
+      "type": "text",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    }
+  ],
+  "isOfficial": false,
+  "isPublic": true,
+  "createdAt": "2026-02-25T13:41:21.225Z",
+  "updatedAt": "2026-02-25T13:41:21.225Z",
+  "is_official": true
+}
