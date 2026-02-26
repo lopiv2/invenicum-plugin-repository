@@ -1,45 +1,58 @@
 {
   "name": "Invenicum Market",
   "templates": [
-    {
-      "id": "tpl-retro-game-003",
-      "name": "Retrogames",
-      "description": "Plantilla completa para videojuegos retro",
-      "category": "Ocio",
-      "tags": [
-        "tech",
-        "gaming"
-      ],
-      "author": "Invenicum Team",
-      "authorAvatarUrl": null,
-      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/retro_game.json",
-      "version": 1
-    },
-    {
-      "id": "tpl-smartphone-001",
-      "name": "Smartphone Estándar",
-      "description": "Plantilla completa para móviles y tablets",
-      "category": "Electrónica",
-      "tags": [
-        "tech",
-        "mobile"
-      ],
-      "author": "Invenicum Team",
-      "authorAvatarUrl": null,
-      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/smartphone.json",
-      "version": 1
-    },
-    {
-      "id": "tpl_f23e36af",
-      "name": "fghfhfgh",
-      "description": "",
-      "category": "General",
-      "tags": [],
-      "author": "lopiv2",
-      "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
-      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/tpl_f23e36af.json",
-      "version": 1,
-      "downloadCount": 2
-    }
+{
+  "id": "tpl-retro-game-003",
+  "name": "Retrogames",
+  "description": "Plantilla completa para videojuegos retro",
+  "category": "Ocio",
+  "tags": [
+    "tech",
+    "gaming"
+  ],
+  "author": "Invenicum Team",
+  "authorAvatarUrl": null,
+  "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/retro_game.json",
+  "version": 1.0
+}
+,
+{
+  "id": "tpl-smartphone-001",
+  "name": "Smartphone Estándar",
+  "description": "Plantilla completa para móviles y tablets",
+  "category": "Electrónica",
+  "tags": [
+    "tech",
+    "mobile"
+  ],
+  "author": "Invenicum Team",
+  "authorAvatarUrl": null,
+  "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/smartphone.json",
+  "version": 1.0
+}
+,
+{
+  "id": "tpl_9dbe39c0",
+  "name": "Muchas pruebas",
+  "description": "",
+  "category": "Pruebas",
+  "tags": [],
+  "author": "lopiv2",
+  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+  "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/tpl_9dbe39c0.json",
+  "version": 1.0
+}
+,
+{
+  "id": "tpl_f23e36af",
+  "name": "fghfhfgh",
+  "description": "",
+  "category": "General",
+  "tags": [],
+  "author": "lopiv2",
+  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+  "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/tpl_f23e36af.json",
+  "version": 1.0
+}
   ]
 }
