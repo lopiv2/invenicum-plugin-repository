@@ -1,0 +1,28 @@
+{
+  "id": "tpl_9dbe39c0",
+  "name": "Muchas pruebas",
+  "description": "",
+  "downloadUrl": null,
+  "category": "Pruebas",
+  "tags": [],
+  "author": "lopiv2",
+  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+  "fields": [
+    {
+      "id": null,
+      "name": "Valor",
+      "type": "price",
+      "isRequired": false,
+      "isSummable": true,
+      "isCountable": false,
+      "isMonetary": true,
+      "dataListId": null,
+      "options": null
+    }
+  ],
+  "isOfficial": true,
+  "isPublic": true,
+  "createdAt": "2026-02-26T12:19:25.237Z",
+  "updatedAt": "2026-02-26T12:19:25.237Z",
+  "downloadCount": 0
+}
