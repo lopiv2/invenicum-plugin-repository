@@ -65,5 +65,11 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add repository.json
-          # Solo hacemos commit si hay cambios reales
-          git diff --quiet && git diff --staged --quiet || (git commit -m "bot: update repository.json index" && git push)
+          
+          # Si no hay cambios, terminamos pacíficamente
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "bot: update repository.json index"
+            # 🚩 EL FIX: Traer cambios remotos y poner el commit del bot encima
+            git pull --rebase origin main
+            git push origin main
+          )
