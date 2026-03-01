@@ -44,6 +44,18 @@
       "version": "1.0"
     },
     {
+      "id": "tpl_b4fcf300",
+      "name": "Masters del Universo",
+      "description": "Plantilla para organizar figuras de acción y accesorios de la franquicia Masters del Universo.",
+      "category": "Coleccionables",
+      "tags": [],
+      "author": "lopiv2",
+      "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/tpl_b4fcf300.json",
+      "downloadCount": 0,
+      "version": "1.0"
+    },
+    {
       "id": "tpl_c9a8f559",
       "name": "Otra",
       "description": "",
