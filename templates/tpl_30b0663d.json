@@ -1,0 +1,28 @@
+{
+  "id": "tpl_30b0663d",
+  "name": "Prueba",
+  "description": "",
+  "downloadUrl": null,
+  "category": "General",
+  "tags": [],
+  "author": "lopiv2",
+  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+  "fields": [
+    {
+      "id": null,
+      "name": "Nuevo Campo",
+      "type": "text",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    }
+  ],
+  "isOfficial": true,
+  "isPublic": true,
+  "createdAt": "2026-03-01T13:12:35.059Z",
+  "updatedAt": "2026-03-01T13:12:35.059Z",
+  "downloadCount": 0
+}
