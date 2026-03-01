@@ -1,12 +1,14 @@
 {
-  "type": "elevatedButton",
-  "child": {
-    "data": "Quién soy?",
-    "type": "text"
-  },
-  "onPressed": {
+  "id": "quien_soy",
+  "name": "Quién Soy",
+  "author": "lopiv2",
+  "ui": {
+    "type": "elevatedButton",
+    "child": { "data": "Quién soy?", "type": "text" },
+      "onPressed": {
     "method": "getUserName",
     "params": {},
     "actionType": "invenicum_sdk"
+  }
   }
 }
