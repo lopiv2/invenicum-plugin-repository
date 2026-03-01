@@ -21,16 +21,16 @@ jobs:
 
       - name: Generate repository.json
         run: |
-          # 1. Crear la estructura inicial vacía
+          # 1. Crear la estructura base vacía
           echo '{ "name": "Invenicum Market", "templates": [] }' > repository.json
           
-          # 2. Iterar sobre cada plantilla y añadirla al array
+          # 2. Iterar sobre los archivos de plantillas
           for file in templates/*.json; do
             [ -e "$file" ] || continue
             
-            echo "Processing $file..."
+            echo "Procesando $file..."
             
-            # Generamos el objeto individual con jq (Sintaxis corregida con comas)
+            # Generar el objeto individual con sintaxis jq corregida (comas y comillas)
             CURRENT_TEMPLATE=$(cat "$file" | jq --arg url "https://raw.githubusercontent.com/${{ github.repository }}/main/$file" '
             {
               "id": .id,
@@ -45,19 +45,19 @@ jobs:
               "version": (.version // 1.0)
             }')
 
-            # Inyectamos el objeto en el array principal
+            # Insertar el objeto en el array del índice usando --argjson
             TMP_JSON=$(jq --argjson new "$CURRENT_TEMPLATE" '.templates += [$new]' repository.json)
             echo "$TMP_JSON" > repository.json
           done
 
-      # 🛡️ PASO DE VALIDACIÓN: Si el JSON está mal formado, la Action fallará aquí
+      # 🛡️ Paso de Validación de Integridad
       - name: Validate repository.json
         run: |
-          echo "Verificando integridad del archivo repository.json..."
+          echo "Verificando validez del archivo repository.json..."
           if jq empty repository.json; then
             echo "✅ JSON válido. Procediendo al commit."
           else
-            echo "❌ Error: El archivo repository.json generado no es un JSON válido."
+            echo "❌ Error: El archivo repository.json generado está corrupto."
             exit 1
           fi
 
@@ -72,5 +72,5 @@ jobs:
             git pull --rebase origin main
             git push origin main
           else
-            echo "No hay cambios significativos en el índice."
+            echo "No hay cambios en el índice para actualizar."
           fi
