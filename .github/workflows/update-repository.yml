@@ -7,7 +7,6 @@ on:
     paths:
       - 'templates/**'
 
-# 🚩 IMPORTANTE: Permisos para que la Action pueda escribir el commit
 permissions:
   contents: write
 
@@ -22,44 +21,45 @@ jobs:
 
       - name: Generate repository.json
         run: |
-          # 1. Crear la estructura base
-          echo '{' > repository.json
-          echo '  "name": "Invenicum Market",' >> repository.json
-          echo '  "templates": [' >> repository.json
+          # 1. Crear la estructura inicial vacía
+          echo '{ "name": "Invenicum Market", "templates": [] }' > repository.json
           
-          # 2. Variable para manejar las comas entre objetos
-          first=true
-          
-          # 3. Iterar sobre los archivos
+          # 2. Iterar sobre cada plantilla y añadirla al array
           for file in templates/*.json; do
-            # Saltamos si no hay archivos o es el propio repository.json por error
             [ -e "$file" ] || continue
             
-            if [ "$first" = true ]; then
-              first=false
-            else
-              echo "," >> repository.json
-            fi
+            echo "Processing $file..."
             
-            # 🚩 Extraemos los datos. Ajustamos el download_url dinámicamente.
-            # Usamos jq para filtrar y limpiar el objeto
-            cat "$file" | jq --arg url "https://raw.githubusercontent.com/${{ github.repository }}/main/$file" \
-            '{
-              id: .id,
-              name: .name,
-              description: .description,
-              category: .category,
-              tags: (.tags // []),
-              author: (.author // .authorName // "Invenicum Team"),
-              authorAvatarUrl: .authorAvatarUrl,
-              download_url: $url,
-              downloadCount: (.downloadCount // 0)
-              version: (.version // 1.0)
-            }' >> repository.json
+            # Generamos el objeto individual con jq (Sintaxis corregida con comas)
+            CURRENT_TEMPLATE=$(cat "$file" | jq --arg url "https://raw.githubusercontent.com/${{ github.repository }}/main/$file" '
+            {
+              "id": .id,
+              "name": .name,
+              "description": .description,
+              "category": .category,
+              "tags": (.tags // []),
+              "author": (.author // .authorName // "Invenicum Team"),
+              "authorAvatarUrl": .authorAvatarUrl,
+              "download_url": $url,
+              "downloadCount": (.downloadCount // 0),
+              "version": (.version // 1.0)
+            }')
+
+            # Inyectamos el objeto en el array principal
+            TMP_JSON=$(jq --argjson new "$CURRENT_TEMPLATE" '.templates += [$new]' repository.json)
+            echo "$TMP_JSON" > repository.json
           done
-          
-          echo '  ]' >> repository.json
-          echo '}' >> repository.json
+
+      # 🛡️ PASO DE VALIDACIÓN: Si el JSON está mal formado, la Action fallará aquí
+      - name: Validate repository.json
+        run: |
+          echo "Verificando integridad del archivo repository.json..."
+          if jq empty repository.json; then
+            echo "✅ JSON válido. Procediendo al commit."
+          else
+            echo "❌ Error: El archivo repository.json generado no es un JSON válido."
+            exit 1
+          fi
 
       - name: Commit and push changes
         run: |
@@ -67,14 +67,10 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add repository.json
           
-          # Solo procedemos si hay cambios reales en el índice
           if ! git diff --quiet --staged; then
             git commit -m "bot: update repository.json index"
-            
-            # 🚩 EL TRUCO: Traer los cambios del merge del PR y poner nuestro commit encima
             git pull --rebase origin main
-            
             git push origin main
           else
-            echo "No changes to repository.json"
+            echo "No hay cambios significativos en el índice."
           fi
