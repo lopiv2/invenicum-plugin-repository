@@ -1,8 +1,29 @@
-- name: Generate repository.json
+name: Update Repository Index
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'templates/**'
+
+permissions:
+  contents: write
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Generate repository.json
         run: |
           # 1. Inicializar el archivo con estructura válida
           echo '{"name": "Invenicum Market", "templates": []}' > repository.json
-          
+
           # 2. Iterar y procesar cada archivo
           for file in templates/*.json; do
             [ -e "$file" ] || continue
@@ -12,10 +33,10 @@
             # Generamos la URL base
             URL="https://raw.githubusercontent.com/${{ github.repository }}/main/$file"
             
-            # 🚀 CORRECCIÓN DE SINTAXIS: 
+            # 🚀 CORRECCIÓN DE SINTAXIS:
             # - Usamos comillas dobles para las claves JSON
-            # - Agregamos la coma faltante después de downloadCount
-            # - Usamos --arg para pasar la URL de forma segura
+            # - Coma añadida tras downloadCount
+            # - Usamos redirección segura a archivo temporal
             jq --arg url "$URL" '.templates += [{
               "id": .id,
               "name": .name,
@@ -30,7 +51,6 @@
             }]' repository.json > repository.tmp.json && mv repository.tmp.json repository.json
           done
 
-      # 🛡️ Validación de integridad
       - name: Validate repository.json
         run: |
           if jq empty repository.json; then
@@ -38,4 +58,18 @@
           else
             echo "❌ Error: El archivo generado no es un JSON válido."
             exit 1
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add repository.json
+          
+          if ! git diff --quiet --staged; then
+            git commit -m "bot: update repository.json index"
+            git pull --rebase origin main
+            git push origin main
+          else
+            echo "No hay cambios en el índice."
           fi
