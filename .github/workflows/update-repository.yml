@@ -1,4 +1,4 @@
-name: Update Repository Index
+name: Update Templates Index
 
 on:
   push:
@@ -19,17 +19,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Generate repository.json
+      - name: Generate repository_template.json
         run: |
-          echo '{"name": "Invenicum Market", "templates": []}' > repository.json
+          # 1. Inicializar el archivo con el nuevo nombre y estructura de array
+          echo '{"name": "Invenicum Market", "templates": []}' > repository_template.json
 
+          # 2. Iterar y procesar cada archivo en la carpeta templates/
           for file in templates/*.json; do
+            # Evitar procesar el propio índice si estuviera en la misma carpeta
+            [[ "$file" == *"repository_template.json"* ]] && continue
             [ -e "$file" ] || continue
-
+            
             echo "Procesando $file..."
-
+            
             URL="https://raw.githubusercontent.com/${{ github.repository }}/main/$file"
-
+            
+            # Generar el objeto de la plantilla
             TEMPLATE=$(jq --arg url "$URL" '{
               "id": .id,
               "name": .name,
@@ -43,14 +48,15 @@ jobs:
               "version": (.version // "1.0")
             }' "$file")
 
+            # Insertar en el archivo final
             jq --argjson template "$TEMPLATE" '.templates += [$template]' \
-              repository.json > repository.tmp.json && mv repository.tmp.json repository.json
+              repository_template.json > tmp.json && mv tmp.json repository_template.json
           done
 
-      - name: Validate repository.json
+      - name: Validate repository_template.json
         run: |
-          if jq empty repository.json; then
-            echo "✅ El índice repository.json es válido."
+          if jq empty repository_template.json; then
+            echo "✅ El índice repository_template.json es válido."
           else
             echo "❌ Error: El archivo generado no es un JSON válido."
             exit 1
@@ -60,12 +66,14 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add repository.json
-
+          
+          # Añadir el archivo específico
+          git add repository_template.json
+          
           if ! git diff --quiet --staged; then
-            git commit -m "bot: update repository.json index"
+            git commit -m "bot: update repository_template.json index"
             git pull --rebase origin main
             git push origin main
           else
-            echo "No hay cambios en el índice."
+            echo "No hay cambios en el índice de plantillas."
           fi
