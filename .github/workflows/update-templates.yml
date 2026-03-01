@@ -21,21 +21,33 @@ jobs:
 
       - name: Generate repository_template.json
         run: |
-          # 1. Inicializar el archivo con el nuevo nombre y estructura de array
-          echo '{"name": "Invenicum Market", "templates": []}' > repository_template.json
+          # 1. Si el archivo no existe, crearlo. Si existe, lo mantendremos para consultar los counts.
+          if [ ! -f repository_template.json ]; then
+            echo '{"name": "Invenicum Market", "templates": []}' > repository_template.json
+          fi
+
+          # Creamos un archivo temporal para el nuevo índice
+          echo '{"name": "Invenicum Market", "templates": []}' > new_repository_template.json
 
           # 2. Iterar y procesar cada archivo en la carpeta templates/
           for file in templates/*.json; do
-            # Evitar procesar el propio índice si estuviera en la misma carpeta
             [[ "$file" == *"repository_template.json"* ]] && continue
             [ -e "$file" ] || continue
             
             echo "Procesando $file..."
             
+            ID=$(jq -r '.id' "$file")
             URL="https://raw.githubusercontent.com/${{ github.repository }}/main/$file"
             
-            # Generar el objeto de la plantilla
-            TEMPLATE=$(jq --arg url "$URL" '{
+            # 🚩 LA CLAVE: Buscar si el ID ya existe en el índice actual y obtener su downloadCount
+            # Si no existe, por defecto es 0.
+            CURRENT_COUNT=$(jq --arg id "$ID" '.templates[] | select(.id == $id) | .downloadCount' repository_template.json || echo "0")
+            
+            # Si la búsqueda anterior devuelve vacío, ponemos 0
+            if [ -z "$CURRENT_COUNT" ]; then CURRENT_COUNT=0; fi
+
+            # Generar el objeto de la plantilla usando el count preservado
+            TEMPLATE=$(jq --arg url "$URL" --argjson count "$CURRENT_COUNT" '{
               "id": .id,
               "name": .name,
               "description": .description,
@@ -44,36 +56,29 @@ jobs:
               "author": (.author // .authorName // "Invenicum Team"),
               "authorAvatarUrl": (.authorAvatarUrl // null),
               "download_url": $url,
-              "downloadCount": (.downloadCount // 0),
+              "downloadCount": $count,
               "version": (.version // "1.0")
             }' "$file")
 
-            # Insertar en el archivo final
+            # Insertar en el nuevo archivo
             jq --argjson template "$TEMPLATE" '.templates += [$template]' \
-              repository_template.json > tmp.json && mv tmp.json repository_template.json
+              new_repository_template.json > tmp.json && mv tmp.json new_repository_template.json
           done
 
+          # Reemplazar el viejo índice por el nuevo
+          mv new_repository_template.json repository_template.json
+
       - name: Validate repository_template.json
-        run: |
-          if jq empty repository_template.json; then
-            echo "✅ El índice repository_template.json es válido."
-          else
-            echo "❌ Error: El archivo generado no es un JSON válido."
-            exit 1
-          fi
+        run: jq empty repository_template.json
 
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
-          # Añadir el archivo específico
           git add repository_template.json
           
           if ! git diff --quiet --staged; then
-            git commit -m "bot: update repository_template.json index"
+            git commit -m "bot: update index preserving download counts"
             git pull --rebase origin main
             git push origin main
-          else
-            echo "No hay cambios en el índice de plantillas."
           fi
