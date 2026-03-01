@@ -30,18 +30,6 @@
       "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/smartphone.json",
       "downloadCount": 0,
       "version": "1.0"
-    },
-    {
-      "id": "tpl_9dbe39c0",
-      "name": "Muchas pruebas",
-      "description": "",
-      "category": "Pruebas",
-      "tags": [],
-      "author": "lopiv2",
-      "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
-      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/tpl_9dbe39c0.json",
-      "downloadCount": 0,
-      "version": "1.0"
     }
   ]
 }
