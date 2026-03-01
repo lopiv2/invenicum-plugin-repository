@@ -30,16 +30,6 @@
       "slot": "dashboard_top",
       "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/plugins/reloj_digital.json",
       "downloadCount": 0
-    },
-    {
-      "id": null,
-      "name": null,
-      "description": "",
-      "version": "1.0.0",
-      "author": "Community",
-      "slot": "dashboard_top",
-      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/plugins/sasdada.json",
-      "downloadCount": 0
     }
   ]
 }
