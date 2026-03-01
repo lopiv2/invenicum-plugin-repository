@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'plugins/**'
+      - 'plugins/**' # Se activa al añadir, editar o borrar archivos en esta carpeta
 
 permissions:
   contents: write
@@ -19,46 +19,69 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Generate repository_plugin.json
+      - name: Regenerate Plugins Index
         run: |
-          # 1. Inicializar con la estructura exacta que lee PluginService
-          echo '{"name": "Invenicum Market", "plugins": []}' > repository_plugin.json
+          # 1. Definir nombres de archivos
+          INDEX_FILE="repository_plugin.json"
+          TEMP_FILE="new_plugin_index.json"
 
-          # 2. Procesar cada plugin
+          # 2. Crear la estructura base del nuevo índice
+          echo '{"name": "Invenicum Market", "plugins": []}' > $TEMP_FILE
+
+          # 3. Iterar sobre los archivos que existen actualmente en plugins/
           for file in plugins/*.json; do
-            [[ "$file" == *"repository_plugin.json"* ]] && continue
+            # Ignorar si es el propio índice
+            [[ "$file" == *"$INDEX_FILE"* ]] && continue
             [ -e "$file" ] || continue
             
-            echo "Procesando $file..."
+            echo "Procesando plugin: $file..."
             
+            ID=$(jq -r '.id' "$file")
             URL="https://raw.githubusercontent.com/${{ github.repository }}/main/$file"
             
-            # 🚩 MAPEO DINÁMICO: Ajustado para que PluginService.js no falle
-            PLUGIN=$(jq --arg url "$URL" '{
+            # 🚩 PERSISTENCIA DE CONTADORES:
+            # Buscamos el downloadCount actual en el índice que ya está en el repo
+            if [ -f "$INDEX_FILE" ]; then
+              # Buscamos el ID y extraemos su contador. Si no existe, devolvemos 0.
+              CURRENT_COUNT=$(jq --arg id "$ID" '.plugins[] | select(.id == $id) | .downloadCount' $INDEX_FILE || echo "0")
+            else
+              CURRENT_COUNT=0
+            fi
+            
+            # Limpiar valor si jq devuelve null o errores de texto
+            [[ -z "$CURRENT_COUNT" || "$CURRENT_COUNT" == "null" ]] && CURRENT_COUNT=0
+
+            # 4. Construir el objeto JSON del Plugin (Ajustado a tu PluginService)
+            PLUGIN=$(jq --arg url "$URL" --argjson count "$CURRENT_COUNT" '{
               "id": .id,
               "name": .name,
               "description": (.description // ""),
               "version": (.version // "1.0.0"),
               "author": (.author // "Community"),
               "slot": (.slot // "dashboard_top"),
-              "download_url": $url
+              "download_url": $url,
+              "downloadCount": $count
             }' "$file")
 
-            jq --argjson plugin "$PLUGIN" '.plugins += [$plugin]' \
-              repository_plugin.json > tmp.json && mv tmp.json repository_plugin.json
+            # 5. Añadir al nuevo índice temporal
+            jq --argjson p "$PLUGIN" '.plugins += [$p]' $TEMP_FILE > tmp.json && mv tmp.json $TEMP_FILE
           done
 
-      - name: Validate JSON Integrity
-        run: jq empty repository_plugin.json
+          # 6. Reemplazar el índice oficial
+          mv $TEMP_FILE $INDEX_FILE
 
-      - name: Commit and push changes
+      - name: Validate and Push
         run: |
+          jq empty repository_plugin.json # Validar JSON
+          
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add repository_plugin.json
           
           if ! git diff --quiet --staged; then
-            git commit -m "bot: sync plugin index with repository_plugin.json"
+            git commit -m "bot: sync plugin index (preserving counts & handling removals)"
             git pull --rebase origin main
             git push origin main
+          else
+            echo "Sin cambios en el catálogo de plugins."
           fi
