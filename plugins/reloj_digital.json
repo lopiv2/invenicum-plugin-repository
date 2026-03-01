@@ -15,7 +15,7 @@
         "type": "text",
         "data": "12:00",
         "style": {
-          "color": "#000000",
+          "color": "#000001",
           "fontSize": 24
         }
       }
