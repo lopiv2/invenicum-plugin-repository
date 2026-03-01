@@ -1,0 +1,83 @@
+{
+  "id": "tpl_b4fcf300",
+  "name": "Masters del Universo",
+  "description": "Plantilla para organizar figuras de acción y accesorios de la franquicia Masters del Universo.",
+  "downloadUrl": null,
+  "category": "Coleccionables",
+  "tags": [],
+  "author": "lopiv2",
+  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+  "fields": [
+    {
+      "id": 1772372663093,
+      "name": "Nombre del Personaje",
+      "type": "text",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    },
+    {
+      "id": 1772372663094,
+      "name": "Línea/Serie",
+      "type": "text",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    },
+    {
+      "id": 1772372663095,
+      "name": "Año de Lanzamiento",
+      "type": "number",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    },
+    {
+      "id": 1772372663096,
+      "name": "Estado (CIB, Loose, MOC)",
+      "type": "dropdown",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    },
+    {
+      "id": 1772372663097,
+      "name": "Precio Pagado",
+      "type": "price",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    },
+    {
+      "id": 1772372663098,
+      "name": "Fecha de Adquisición",
+      "type": "date",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    }
+  ],
+  "isOfficial": true,
+  "isPublic": true,
+  "createdAt": "2026-03-01T13:44:37.921Z",
+  "updatedAt": "2026-03-01T14:44:37.858",
+  "downloadCount": 0
+}
