@@ -12,11 +12,11 @@
       "downloadCount": 0
     },
     {
-      "id": null,
-      "name": null,
+      "id": "quien_soy",
+      "name": "Quién Soy",
       "description": "",
       "version": "1.0.0",
-      "author": "Community",
+      "author": "lopiv2",
       "slot": "dashboard_top",
       "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/plugins/quien_soy.json",
       "downloadCount": 0
