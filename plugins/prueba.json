@@ -1,0 +1,15 @@
+{
+  "id": "prueba",
+  "name": "Prueba",
+  "description": "",
+  "version": "1.0.0",
+  "author": "lopiv2",
+  "slot": "dashboard_top",
+  "ui": {
+    "type": "container",
+    "child": {
+      "data": "Nuevo Plugin",
+      "type": "text"
+    }
+  }
+}
