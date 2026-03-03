@@ -2,7 +2,7 @@
   "id": "reloj_digital",
   "name": "Reloj Digital Moderno",
   "description": "Un reloj minimalista con fondo blanco y bordes redondeados.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "lopiv2",
   "authorAvatar": "https://avatars.githubusercontent.com/u/58883759?v=4",
   "slot": "dashboard_top",
