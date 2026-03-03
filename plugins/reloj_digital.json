@@ -4,9 +4,21 @@
   "description": "Un reloj minimalista con fondo blanco y bordes redondeados.",
   "version": "1.0.0",
   "author": "lopiv2",
+  "authorAvatar": "https://avatars.githubusercontent.com/u/58883759?v=4",
   "slot": "dashboard_top",
   "ui": {
     "type": "container",
+    "child": {
+      "type": "center",
+      "child": {
+        "data": "12:00",
+        "type": "text",
+        "style": {
+          "color": "#000001",
+          "fontSize": 24
+        }
+      }
+    },
     "decoration": {
       "color": "#FFFFFF",
       "borderRadius": {
@@ -14,17 +26,6 @@
         "topRight": 16,
         "bottomLeft": 16,
         "bottomRight": 16
-      }
-    },
-    "child": {
-      "type": "center",
-      "child": {
-        "type": "text",
-        "data": "12:00",
-        "style": {
-          "color": "#000000",
-          "fontSize": 24
-        }
       }
     }
   }
