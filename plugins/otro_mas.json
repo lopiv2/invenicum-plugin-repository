@@ -2,14 +2,14 @@
   "id": "otro_mas",
   "name": "Otro mas",
   "description": "",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "lopiv2",
   "authorAvatar": "https://avatars.githubusercontent.com/u/58883759?v=4",
   "slot": "dashboard_top",
   "ui": {
     "type": "container",
     "child": {
-      "data": "Nuevo Plugin",
+      "data": "Nuevo Plugins",
       "type": "text"
     }
   }
