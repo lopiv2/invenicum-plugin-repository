@@ -66,6 +66,18 @@
       "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/tpl_c9a8f559.json",
       "downloadCount": 0,
       "version": "1.0"
+    },
+    {
+      "id": "tpl_ed2de3eb",
+      "name": "Prueba final",
+      "description": "",
+      "category": "General",
+      "tags": [],
+      "author": "lopiv2",
+      "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+      "download_url": "https://raw.githubusercontent.com/lopiv2/invenicum-market-repository/main/templates/tpl_ed2de3eb.json",
+      "downloadCount": 0,
+      "version": "1.0"
     }
   ]
 }
