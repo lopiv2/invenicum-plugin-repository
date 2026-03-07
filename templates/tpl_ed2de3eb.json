@@ -1,0 +1,42 @@
+{
+  "id": "tpl_ed2de3eb",
+  "name": "Prueba final",
+  "description": "",
+  "downloadUrl": null,
+  "category": "General",
+  "tags": [],
+  "author": "lopiv2",
+  "authorAvatarUrl": "https://avatars.githubusercontent.com/u/58883759?v=4",
+  "fields": [
+    {
+      "id": 1772880744091,
+      "name": "Requerido",
+      "type": "text",
+      "isRequired": true,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": null
+    },
+    {
+      "id": 1772880750817,
+      "name": "Estilo",
+      "type": "dropdown",
+      "isRequired": false,
+      "isSummable": false,
+      "isCountable": false,
+      "isMonetary": false,
+      "dataListId": null,
+      "options": [
+        "nuevo",
+        "viejo"
+      ]
+    }
+  ],
+  "isOfficial": true,
+  "isPublic": true,
+  "createdAt": "2026-03-07T10:52:46.898Z",
+  "updatedAt": "2026-03-07T11:52:42.722",
+  "downloadCount": 0
+}
